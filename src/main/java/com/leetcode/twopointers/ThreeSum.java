@@ -25,7 +25,7 @@ public class ThreeSum {
     /**
      * 如果不能重复使用元素
      */
-    public List<List<Integer>> _threeSum(int[] nums) {
+    public List<List<Integer>> threeSum(int[] nums) {
         if (nums == null || nums.length < 3) {
             return Collections.emptyList();
         }

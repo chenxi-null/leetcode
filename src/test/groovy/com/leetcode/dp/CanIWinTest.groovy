@@ -1,5 +1,6 @@
 package com.leetcode.dp
 
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -8,6 +9,7 @@ import spock.lang.Unroll
  * @author chenxi <chenxi01@souche.com>
  * @date 2020/4/23
  */
+@Ignore
 class CanIWinTest extends Specification {
     @Unroll
     def "CanIWin"() {

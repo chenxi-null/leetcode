@@ -1,5 +1,6 @@
 package com.leetcode.array
 
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -9,6 +10,7 @@ import spock.lang.Specification
  */
 class FindMinimum_in_RotatedSortedArrayTest extends Specification {
 
+    @Ignore
     def "FindMin II"(int[] a, int r) {
         expect:
         r == new FindMinimum_in_RotatedSortedArrayII().findMin(a)

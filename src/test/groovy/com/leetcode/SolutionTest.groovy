@@ -1,5 +1,6 @@
 package com.leetcode
 
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -22,6 +23,7 @@ class SolutionTest extends Specification {
         ['a', 'a(1)', 'a(3)', 'a', 'a(2)'] | ['a', 'a(1)', 'a(3)', 'a(2)', 'a(2)(1)']
     }
 
+    @Ignore
     def "5438"(int[] a, int m, int k, int r) {
         expect:
         println a

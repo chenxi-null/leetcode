@@ -20,6 +20,7 @@ import java.util.Arrays;
  * @author chenxi <chenxi01@souche.com>
  * @date 2020/4/23
  */
+// #[Trying]
 public class CanIWin {
 
     /*
