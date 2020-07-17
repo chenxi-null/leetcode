@@ -1,4 +1,7 @@
 
+本人的 leetcode 刷题记录 📝。  
+语言: Java ☕️
+
 # 目录说明
 
 题解代码分布在两个地方：
@@ -73,14 +76,15 @@ while (l < n) {
 ---
 
 ## Backtracking
-```
+```java
 ```
 
 # Tags
+在代码里标注的一些 tag：
 ```
-#[WA]     // 错误记录📝，包括本地调试时发现的错误，。。。
+#[WA]     // 错误记录📝，包括本地调试时发现的错误和提交后发现的错误❌，错误类型包括未考虑边界条件、审题错误、一些低级的编码错误等等
 #[Better] // 更好的解法
-#[Share]  // 晚上分享的解法
+#[Share]  // 其他人分享的题解
 #[Other]  // 其他解法，比如有的题目既可以用 DB 解，又可以用 sliding window 解
 #[Trying] // 尝试中的题目
 ```
@@ -107,15 +111,9 @@ https://en.wikipedia.org/wiki/3SUM
 
 # 待解决
 
-## relax
 
-https://leetcode-cn.com/problems/4sum-ii/
+- [ ] `#bit #prefix` https://leetcode-cn.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/
 
-## fight
+- [ ] https://leetcode-cn.com/problems/merge-k-sorted-lists/
 
-`#bit #prefix`
-https://leetcode-cn.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/
-
-https://leetcode-cn.com/problems/merge-k-sorted-lists/
-
-1488 avoid-floor
+- [ ] 1488 avoid-floor
