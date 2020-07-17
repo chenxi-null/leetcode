@@ -1,0 +1,8 @@
+.idea
+*.iml
+target
+build
+test.txt
+/src/main/leetcode/editor/cn/all.json
+/src/main/leetcode/editor/cn/translation.json
+/src/main/leetcode/editor/cn/doc/
