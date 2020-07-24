@@ -10,11 +10,14 @@ class _1519_Number_of_Nodes_in_the_SubTree_With_the_Same_Label {
         this.labels = labels;
         this.connMap = new HashMap<>();
         this.ans = new int[n];
+        this.visited = new boolean[n];
         for (int[] e : edges) {
             int l = e[0];
             int r = e[1];
             connMap.putIfAbsent(l, new LinkedList<>());
             connMap.get(l).add(r);
+            connMap.putIfAbsent(r, new LinkedList<>());
+            connMap.get(r).add(l);
         }
         count(0);
         return ans;
@@ -23,18 +26,22 @@ class _1519_Number_of_Nodes_in_the_SubTree_With_the_Same_Label {
     private String labels;
     private Map<Integer, List<Integer>> connMap;
     private int[] ans;
+    private boolean[] visited;
 
     public Map<Character, Integer> count(int root) {
+        visited[root] = true;
         Map<Character, Integer> resMap = new HashMap<>();
         char currLabel = labels.charAt(root);
         List<Integer> childsIndexes = connMap.get(root);
         if (childsIndexes != null) {
             for (int i : childsIndexes) {
-                Map<Character, Integer> map = count(i);
-                map.forEach((ch, cnt) -> {
-                    int t = resMap.get(ch) == null ? 0 : resMap.get(ch);
-                    resMap.put(ch, t + cnt);
-                });
+                if (!visited[i]) {
+                    Map<Character, Integer> map = count(i);
+                    map.forEach((ch, cnt) -> {
+                        int t = resMap.get(ch) == null ? 0 : resMap.get(ch);
+                        resMap.put(ch, t + cnt);
+                    });
+                }
             }
         }
         int t = resMap.get(currLabel) == null ? 0 : resMap.get(currLabel);
