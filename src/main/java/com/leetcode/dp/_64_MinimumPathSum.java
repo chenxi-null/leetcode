@@ -65,7 +65,7 @@ public class _64_MinimumPathSum {
         return dp[nr - 1][nc - 1];
     }
 
-    // O(N): one-dimensional DP array
+    // O(N) space complexity: one-dimensional DP array
     public int _minPathSum(int[][] a) {
         if (a == null || a.length == 0 || a[0] == null || a[0].length == 0) {
             return 0;
@@ -89,7 +89,29 @@ public class _64_MinimumPathSum {
         return dp[nc - 1];
     }
 
-    public int __minPathSum(int[][] a) {
 
+    // O(1) space complexity: in-place
+    public int __minPathSum(int[][] a) {
+        if (a == null || a.length == 0 || a[0] == null || a[0].length == 0) {
+            return 0;
+        }
+        int nr = a.length;
+        int nc = a[0].length;
+
+        // first column
+        for (int i = 1; i < nr; i++) {
+            a[i][0] += a[i - 1][0];
+        }
+        // first row
+        for (int j = 1; j < nc; j++) {
+            a[0][j] += a[0][j - 1];
+        }
+
+        for (int i = 1; i < nr; i++) {
+            for (int j = 1; j < nc; j++) {
+                a[i][j] += Math.min(a[i - 1][j], a[i][j - 1]);
+            }
+        }
+        return a[nr - 1][nc - 1];
     }
 }
