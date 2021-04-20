@@ -19,11 +19,13 @@ class DivideTwoIntegersTest extends Specification {
 
     def "Divide"() {
         def t = new DivideTwoIntegers()
+        expect:
         c == t.divide(a, b)
-        println Integer.MIN_VALUE
         where:
         a                 | b                 || c
         Integer.MIN_VALUE | -1                || Integer.MAX_VALUE
+        Integer.MIN_VALUE | 1                 || Integer.MIN_VALUE
+
 
         Integer.MIN_VALUE | Integer.MIN_VALUE || 1
         Integer.MAX_VALUE | Integer.MAX_VALUE || 1

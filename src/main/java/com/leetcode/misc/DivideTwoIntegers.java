@@ -1,4 +1,6 @@
-package com.leetcode.misc;//Given two integers dividend and divisor, divide two integers without using mul
+package com.leetcode.misc;
+
+//Given two integers dividend and divisor, divide two integers without using mul
 //tiplication, division, and mod operator. 
 //
 // Return the quotient after dividing dividend by divisor. 
@@ -54,71 +56,41 @@ package com.leetcode.misc;//Given two integers dividend and divisor, divide two 
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class DivideTwoIntegers {
-        /*
-    // bs:
-        a[l], a[r]
-        a[l|r]
-        a[r], a[l]
 
-        1.5
-        1, 2
+    public int divide(int a, int b) {
+        boolean hasSign = (a > 0 && b < 0) || (a < 0 && b > 0);
 
-        e.g.:
-        (10, 3)
-        l, m, r,   a[m]
-        0, 5, 10,  15 > 10
-        0, 2, 4    6 < 10
-        3, 3, 4    9 < 10
-        4, 4, 4    12 > 10
-        4, _, 3
-
-        (1, 1)
-        l, m, r,   a[m]
-        0, 0, 1    0 < 1
-        1, 1, 1    1 == 1
-
-        (4, 1)
-        l, m, r,   a[m]
-        0, 2, 4    2 < 4
-        3, 3, 4
-        4, 4, 4
-         */
-
-    private int abs(int a) {
-        return Math.abs(a);
-    }
-
-    public int divide(int dividend, int divisor) {
-        boolean hasSign = (dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0);
-
-        if (dividend == Integer.MAX_VALUE && divisor == Integer.MIN_VALUE) {
+        if (a == Integer.MAX_VALUE && b == Integer.MIN_VALUE) {
             return 0;
         }
-
-        if (dividend == Integer.MIN_VALUE) {
-            dividend = Integer.MAX_VALUE;
-        }
-        if (divisor == Integer.MIN_VALUE) {
-            divisor = Integer.MAX_VALUE;
+        if (a == Integer.MIN_VALUE && b == 1) {
+            return Integer.MIN_VALUE;
         }
 
-        if (abs(dividend) < abs(divisor) ||
-                dividend == 0 ||
-                divisor == 0) {
+        if (a == Integer.MIN_VALUE) a = Integer.MAX_VALUE;
+        if (b == Integer.MIN_VALUE) b = Integer.MAX_VALUE;
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+
+        if (a < b || a == 0 || b == 0) {
             return 0;
+        }
+        if (b == 1) {
+            return hasSign ? -a : a;
         }
 
         int left = 0;
-        int right = abs(dividend);
+        int right = a;
         int ans;
         while (true) {
             if (left > right) {
                 ans = right;
                 break;
             }
-            int mid = (left + right) / 2;
-            int midVal = mid * abs(divisor);
-            int target = abs(dividend);
+            int mid = left + (right - left) / 2;
+            int midVal = mul(mid, b);
+            //System.out.println("l, m, r, a[m] " + left + ", " + mid + ", " + right + ", " + midVal);
+            int target = a;
             if (midVal < 0 || midVal > target) {
                 right = mid - 1;
             } else if (midVal < target) {
@@ -129,6 +101,15 @@ class DivideTwoIntegers {
             }
         }
         return hasSign ? -ans : ans;
+    }
+
+    //todo
+    private int mul(int x, int y) {
+        long ans = ((long) (x)) * ((long) (y));
+        if (ans > Integer.MAX_VALUE) {
+            return -1;
+        }
+        return (int) ans;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
