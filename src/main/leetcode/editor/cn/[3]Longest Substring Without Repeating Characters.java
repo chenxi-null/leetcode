@@ -49,9 +49,13 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
         int n = s.length();
-        int[] hash = new int[1024];
+        Set<Integer> hash = new HashSet<>();
         int[] dp = new int[n];
+        dp[0] = 1;
         int max = 1;
         int l = 0;
         int r = 1;
@@ -59,13 +63,15 @@ class Solution {
             int c = s.charAt(r);
 
             dp[r] = dp[r - 1] + 1;
-            while (hash[c] >= 1) {
+            while (hash.contains(c)) {
                 //remove from window & update state
-                hash[l++]--;
+                int t = s.charAt(l);
+                hash.remove(t);
+                l++;
                 dp[r]--;
             }
             //add into window & update state;
-            hash[c]++;
+            hash.add(c);
 
             max = Math.max(dp[r], max);
         }
