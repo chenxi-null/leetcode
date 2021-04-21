@@ -14,6 +14,37 @@ import java.util.Set;
 public class LongestSubstringWithoutRepeatingCharacters {
 
     public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int n = s.length();
+
+        Set<Character> hash = new HashSet<>();
+        hash.add(s.charAt(0));
+        int[] dp = new int[n];
+        dp[0] = 1;
+        int max = 1;
+
+        int l = 0;
+        for (int r = 1; r < n; r++) {
+            char c = s.charAt(r);
+
+            dp[r] = dp[r - 1] + 1;
+            while (hash.contains(c)) {
+                //remove from window & update state
+                hash.remove(s.charAt(l));
+                l++;
+                --dp[r];
+            }
+            //add into window & update state;
+            hash.add(c);
+
+            max = Math.max(dp[r], max);
+        }
+        return max;
+    }
+
+    public int lengthOfLongestSubstring_2020(String s) {
         if (s.isEmpty()) {
             return 0;
         }

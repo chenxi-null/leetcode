@@ -19,6 +19,16 @@ class LongestSubstringWithoutRepeatingCharactersTest extends Specification {
 						测试用例:"pwwkew"
 						3
      */
+
     def "LengthOfLongestSubstring"() {
+        def t = new LongestSubstringWithoutRepeatingCharacters()
+        expect:
+        l == t.lengthOfLongestSubstring(s)
+        where:
+        s            | l
+        "abcabcbb"   | 3
+        "abcabcabcd" | 4
+        ""           | 0
+        "a"          | 1
     }
 }

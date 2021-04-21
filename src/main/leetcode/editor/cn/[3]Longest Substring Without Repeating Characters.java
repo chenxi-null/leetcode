@@ -53,22 +53,23 @@ class Solution {
             return 0;
         }
         int n = s.length();
-        Set<Integer> hash = new HashSet<>();
+
+        Set<Character> hash = new HashSet<>();
+        hash.add(s.charAt(0));
         int[] dp = new int[n];
         dp[0] = 1;
         int max = 1;
+
         int l = 0;
-        int r = 1;
-        for (; r < n; r++) {
-            int c = s.charAt(r);
+        for (int r = 1; r < n; r++) {
+            char c = s.charAt(r);
 
             dp[r] = dp[r - 1] + 1;
             while (hash.contains(c)) {
                 //remove from window & update state
-                int t = s.charAt(l);
-                hash.remove(t);
+                hash.remove(s.charAt(l));
                 l++;
-                dp[r]--;
+                --dp[r];
             }
             //add into window & update state;
             hash.add(c);
@@ -77,6 +78,7 @@ class Solution {
         }
         return max;
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
