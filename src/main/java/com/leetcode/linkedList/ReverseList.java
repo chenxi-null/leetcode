@@ -27,6 +27,44 @@ import com.leetcode.ListNode;
 class ReverseList {
 
     /*
+    Input: 1->2->3->4->5->NULL
+    Output: 5->4->3->2->1->NULL
+
+      prev  p    next
+    1 <- 2  3 -> 4 -> 5
+
+             prev  p
+    1 <- 2 <- 3    4 -> 5
+
+                     p
+    1 <- 2 <- 3 <- 4 5
+
+
+    next = p.next;
+    p.next = prev
+    prev = p;
+    p = next;
+
+    cases:
+
+    null
+    1
+    1 2
+     */
+    public ListNode reverseList_20210421(ListNode h) {
+        ListNode prev = null;
+        ListNode p = h;
+        ListNode next;
+        while (p != null) {
+            next = p.next;
+            p.next = prev;
+            prev = p;
+            p = next;
+        }
+        return prev;
+    }
+
+    /*
      1 -> (k-1) -> k -> (k+1) <- ... <- n
      */
     public ListNode reverseList_recursion(ListNode head) {
