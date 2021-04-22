@@ -10,6 +10,15 @@ import spock.lang.Specification
  */
 class SolutionTest extends Specification {
 
+    def "temp"() {
+        println (2 + 4) % 9
+
+        print (Integer.MAX_VALUE / 2) * 3
+
+        expect:
+        true
+    }
+
     def "test"(String[] input, String[] output) {
         expect:
         String[] actual = new Solution().getFolderNames(input)
