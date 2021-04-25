@@ -56,6 +56,7 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] findOrder(int n, int[][] p) {
+        // 0: init, 1: searching, 2: finished
         int[] visited = new int[n];
         List<Integer> ans = new ArrayList<>();
         Map<Integer, List<Integer>> conn = new HashMap<>();
@@ -69,11 +70,8 @@ class Solution {
         }
 
         for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
-                boolean r = dfs(i, conn, visited, ans);
-                if (!r) {
-                    return new int[]{};
-                }
+            if (!dfs(i, conn, visited, ans)) {
+                return new int[]{};
             }
         }
 
@@ -84,15 +82,13 @@ class Solution {
         return a;
     }
 
-    //todo: need three var to represent state of visited
     private boolean dfs(int r, Map<Integer, List<Integer>> conn, int[] visited, List<Integer> ans) {
+        if (visited[r] == 2) return true;
+        if (visited[r] == 1) return false;
         visited[r] = 1;
         List<Integer> nodes = conn.get(r);
         if (nodes != null && !nodes.isEmpty()) {
             for (Integer node : nodes) {
-                if (visited[node] > 0) {
-                    return false;
-                }
                 boolean valid = dfs(node, conn, visited, ans);
                 if (!valid) {
                     return false;
@@ -100,6 +96,7 @@ class Solution {
             }
         }
         ans.add(r);
+        visited[r] = 2;
         return true;
     }
 }
