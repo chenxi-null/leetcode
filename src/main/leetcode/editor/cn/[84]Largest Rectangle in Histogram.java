@@ -32,7 +32,36 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
     public int largestRectangleArea(int[] a) {
+        int n = a.length;
+        Stack<Integer> stk = new Stack<>(); // 存储数组的下标
+        int[] left = new int[n]; // left[i]: 以 a[i] 为高度的矩形的最左下标
+        int[] right = new int[n]; // ...
+        for (int i = 0; i < n; i++) {
+            while (!stk.isEmpty() && a[i] <= a[stk.peek()]) {
+                stk.pop();
+            }
+            left[i] = stk.isEmpty() ? 0 : stk.peek() + 1;
+            stk.push(i);
+        }
+        stk.clear();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stk.isEmpty() && a[i] <= a[stk.peek()]) {
+                stk.pop();
+            }
+            right[i] = stk.isEmpty() ? n - 1 : stk.peek() - 1;
+            stk.push(i);
+        }
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            int t = a[i] * (right[i] - left[i] + 1);
+            ans = Math.max(ans, t);
+        }
+        return ans;
+    }
+
+    public int largestRectangleArea_0421(int[] a) {
         int n = a.length;
         int[] left = new int[n];
         int[] right = new int[n];
@@ -63,3 +92,6 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+// #[WA] 数组值和数组下标弄混淆
+//  e.g: a[i] <= stk.peek() vs a[i] < a[stk.peek()]
