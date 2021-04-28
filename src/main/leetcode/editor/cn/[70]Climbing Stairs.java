@@ -39,13 +39,17 @@
 class Solution {
     public int climbStairs(int n) {
         // f(n) = f(n-1) + f(n-2)
-        int[] dp = new int[n + 1];
-        dp[0] = 1;
-        dp[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
+        if (n <= 1) {
+            return 1;
         }
-        return dp[n];
+        int pp = 1, p = 1;
+        int cur = 0;
+        for (int i = 2; i <= n; i++) {
+            cur = p + pp;
+            pp = p;
+            p = cur;
+        }
+        return cur;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
