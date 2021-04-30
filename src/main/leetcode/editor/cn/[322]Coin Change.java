@@ -64,17 +64,18 @@ class Solution {
     public int coinChange(int[] coins, int n) {
         int[] dp = new int[n + 1];
         dp[0] = 0;
+        int max = Integer.MAX_VALUE;
         for (int i = 1; i < dp.length; i++) {
-            dp[i] = Integer.MAX_VALUE;
+            dp[i] = max;
         }
         for (int i = 0; i < dp.length; i++) {
-            for (int c : coins) {
-                if (c <= 10000 && i + c <= n && dp[i] != Integer.MAX_VALUE) {
-                    dp[i + c] = Math.min(dp[i] + 1, dp[i + c]);
+            for (int coin : coins) {
+                if (coin <= i && dp[i - coin] != max) {
+                    dp[i] = Math.min(dp[i - coin] + 1, dp[i]);
                 }
             }
         }
-        return dp[n] == Integer.MAX_VALUE ? -1 : dp[n];
+        return dp[n] == max ? -1 : dp[n];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
