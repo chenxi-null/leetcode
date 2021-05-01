@@ -32,10 +32,33 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+
+    // f(i,j): 对于前 i 个数字，是否存在和为 j 的组合
+    // f(i,j) = f(i-1,j-num) || f(i-1,j)
+    // f(i,0) = true
     public boolean canPartition(int[] a) {
-        // f(i,j): 对于前 i 个数字，是否存在 |sum1 - sum2| == j ？
-        // j = j0 + num || j0 - num || num - j0
-        // f(i,j) = f(i-1, j-num);
+        int sum = 0;
+        for (int x : a) {
+            sum += x;
+        }
+        if (sum % 2 == 1) return false;
+        int target = sum / 2;
+
+        boolean[] dp = new boolean[target + 1];
+        dp[0] = true;
+        for (int num : a) {
+            for (int i = target; i > 0; i--) {
+                if (i >= num) {
+                    dp[i] = dp[i - num] || dp[i];
+                }
+            }
+        }
+        return dp[target];
+    }
+
+    // f(i,j): 对于前 i 个数字，是否存在 |sum1 - sum2| == j ？
+    // j = j0 + num || j0 - num || num - j0
+    public boolean canPartition_20210430(int[] a) {
         int n = a.length;
         int maxDiff = n * 100;
         boolean[][] dp = new boolean[n + 1][];
