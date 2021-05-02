@@ -49,31 +49,27 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     // f(i,j): 前 i 个数目标和为 j 的组合个数
-    // 选择：+num or -num
-    // f(i,j) = f(i-1, j-num) + f(i-1, j+num)
-    public int findTargetSumWays(int[] a, int target) {
-        target = Math.abs(target);
-
-        int n = a.length;
-        int[][] dp = new int[n + 1][];
-        for (int i = 0; i < dp.length; i++) {
-            dp[i] = new int[2 * 1000 + 1];
+    // 选择：当前 num 放入或者不放
+    // f(i,j) = f(i-1, j) + f(i-1, j-num)
+    // f(0,0) = 1
+    public int findTargetSumWays(int[] a, int s) {
+        // x + y = sum
+        // x - y = s
+        // x = (sum + s) / 2;
+        int sum = 0;
+        for (int x : a) {
+            sum += x;
         }
-        dp[0][0] = 1;
-
-        for (int i = 1; i < dp.length; i++) {
-            for (int j = 0; j < dp[i].length; j++) {
-                int num = a[i - 1];
-                if (j >= num) {
-                    dp[i][j] += dp[i - 1][j - num];
-                }
-                if (j + num <= target) {
-                    dp[i][j] += dp[i - 1][j + num];
-                }
+        if ((sum + s) % 2 == 1) return 0;
+        int target = (sum + s) / 2;
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        for (int num : a) {
+            for (int i = target; i >= num; i--) {
+                dp[i] += dp[i - num];
             }
         }
-
-        return dp[n][target];
+        return dp[target];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
