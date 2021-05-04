@@ -45,6 +45,7 @@ class Solution {
                 } else if (a[i] + a[j] < -a[k]) {
                     ++i;
                 } else {
+                    // duplicated
                     if ((i == k + 1 || a[i] != a[i - 1]) && (j == n - 1 || a[j] != a[j + 1])) {
                         ans.add(Arrays.asList(a[k], a[i], a[j]));
                     }
