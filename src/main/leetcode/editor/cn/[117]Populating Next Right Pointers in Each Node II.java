@@ -137,3 +137,6 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+//#[Better]: more simple code
+// https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/solution/tian-chong-mei-ge-jie-dian-de-xia-yi-ge-you-ce-15/
