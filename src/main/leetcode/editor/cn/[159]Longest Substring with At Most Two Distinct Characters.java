@@ -36,27 +36,21 @@ class Solution {
         int[] hash = new int[26 * 2];
         int count = 0; // distinct count in the current sliding window
 
-        hash[toIdx(s, 0)]++;
-        count = 1;
-        ans = 1;
-
-        int l = 1, r = 1;
+        int l = 0, r = -1;
         int n = s.length();
         for (; l < n; l++) {
             // update state when removing element from left side
-            int idx = toIdx(s, l);
-            hash[idx]--;
-            if (hash[idx] == 0) {
-                count--;
+            if (l != 0) {
+                int idx = toIdx(s, l - 1);
+                hash[idx]--;
+                if (hash[idx] == 0) {
+                    count--;
+                }
             }
 
-            // if not statified
-            if (count > 2) {
-                continue;
-            }
-
-            while (++r < n) {
-                //update state when adding element from right side
+            while (count <= 2 && ++r < n) {
+                // update state when adding element from right side
+                int idx = toIdx(s, r);
                 hash[idx]++;
                 if (hash[idx] == 1) {
                     count++;
@@ -64,8 +58,6 @@ class Solution {
                 // if statisfied
                 if (count <= 2) {
                     ans = Math.max(ans, r - l + 1);
-                } else {
-                    break;
                 }
             }
         }
