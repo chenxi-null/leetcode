@@ -37,11 +37,16 @@ class Solution {
 
         int[] hash = new int[26 * 2];
         int count = 0;
-        int targetCount = t.length();
-        Set<Character> targetLetters = new HashSet();
+        Map<Character, Integer> letterToNums = new HashMap<>();
         for (int i = 0; i < t.length(); i++) {
-            targetLetters.add(t.charAt(i));
+            char ch = t.charAt(i);
+            if (!letterToNums.containsKey(ch)) {
+                letterToNums.put(ch, 1);
+            } else {
+                letterToNums.put(ch, letterToNums.get(ch) + 1);
+            }
         }
+        int targetCount = letterToNums.size();
 
         int l = 0, r = 0;
         int n = s.length();
@@ -49,7 +54,8 @@ class Solution {
             // adding element from right side
             int idx = toIdx(s, r);
             hash[idx]++;
-            if (hash[idx] == 1 && targetLetters.contains(s.charAt(r))) {
+            Integer tmpNum = letterToNums.get(s.charAt(r));
+            if (tmpNum != null && hash[idx] == tmpNum) {
                 count++;
             }
 
@@ -64,10 +70,11 @@ class Solution {
                 // remove left-most element;
                 int idx1 = toIdx(s, l);
                 hash[idx1]--;
-                if (hash[idx1] == 0 && targetLetters.contains(s.charAt(l))) {
+                Integer tmpNum1 = letterToNums.get(s.charAt(l));
+                if (tmpNum1 != null && hash[idx1] < tmpNum1) {
                     count--;
                 }
-                --l;
+                l++;
             }
         }
 
