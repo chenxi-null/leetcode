@@ -38,26 +38,37 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int search(int[] nums, int target) {
-        int n = nums.length;
+    public int search(int[] a, int target) {
+        int n = a.length;
         int l = 0, r = n - 1;
         while (l <= r) {
+            if (r - l <= 1) {
+                if (a[l] == target) return l;
+                if (a[r] == target) return r;
+                return -1;
+            }
             int mid = (l + r) / 2;
-            int midVal = nums[mid];
-            if (midVal > target) {
-                if (mid > nums[l]) {
-                    l = mid + 1;
-                } else {
-                    r = mid - 1;
-                }
-            } else if (midVal < target) {
-                if (mid < nums[r]) {
-                    r = mid - 1;
-                } else {
-                    l = mid + 1;
-                }
-            } else {
+            int midVal = a[mid];
+            if (midVal == target) {
                 return mid;
+            }
+            // l | m, r, right interval is ordered
+            if (midVal <= a[r]) {
+                // l | m, t, r
+                if (midVal < target && target <= a[r]) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            // left interval is ordered
+            else {
+                // l, t, m | r
+                if (a[l] <= target && target < midVal) {
+                    r = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
             }
         }
         return -1;
@@ -65,7 +76,25 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
+// https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/sou-suo-xuan-zhuan-pai-xu-shu-zu-by-leetcode-solut/
+
 /*
+
+e.g:
+[4,5,6,7,0,1,2]
+ 0 1 2 3 4 5 6
+
+l, m, r
+4  7, 2
+
+
+
+
+
+
+=====
+2020-05-12
+
 1. rotated e.g. (3, 2)
 - mid > left,
     - mid > target, [l, m)
