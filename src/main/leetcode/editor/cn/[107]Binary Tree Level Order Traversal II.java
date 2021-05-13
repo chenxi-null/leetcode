@@ -56,15 +56,15 @@ class Solution {
         if (root == null) return Collections.emptyList();
 
         List<List<Integer>> ans = new ArrayList<>();
-        Deque<E> q = new LinkedList<>();
+        Queue<E> q = new LinkedList<>();
         int prevLvl = 0;
-        q.offerLast(new E(root, 1));
+        q.offer(new E(root, 1));
         while (!q.isEmpty()) {
             // pop the element from head of queue
             // add into result list
                 // create a new inner list if current level is diff from previous
                 // append the element into the last inner list if same
-            E cur = q.pollFirst();
+            E cur = q.poll();
             if (cur.lvl != prevLvl) {
                 ans.add(new ArrayList<>());
             }
@@ -72,8 +72,8 @@ class Solution {
             prevLvl = cur.lvl;
 
             // offer its left and right node into tail of queue
-            if (cur.node.left != null) q.offerLast(new E(cur.node.left, cur.lvl + 1));
-            if (cur.node.right != null) q.offerLast(new E(cur.node.right, cur.lvl + 1));
+            if (cur.node.left != null) q.offer(new E(cur.node.left, cur.lvl + 1));
+            if (cur.node.right != null) q.offer(new E(cur.node.right, cur.lvl + 1));
         }
         Collections.reverse(ans);
         return ans;
