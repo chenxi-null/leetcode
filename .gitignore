@@ -7,3 +7,5 @@ test.txt
 /src/main/leetcode/editor/cn/translation.json
 /src/main/leetcode/editor/cn/doc/
 temp/
+src/main/java/com/leetcode/TempTest.java
+.DS_Store
