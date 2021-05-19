@@ -40,6 +40,9 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
         int n = s.length();
         int m = p.length();
+        if (m > n) {
+            return ans;
+        }
         int target[] = new int[26];
         for (int i = 0; i < m; i++) {
             target[p.charAt(i) - 'a']++;
@@ -52,19 +55,14 @@ class Solution {
         for (int i = 0; i + m - 1 < n; i++) {
             // remove left-most element
             if (i != 0) {
-                System.out.println("remove: " + s.charAt(i - 1));
                 hash[s.charAt(i - 1) - 'a']--;
             }
             // add right-most element
-            System.out.println("add: " + s.charAt(i + m - 1));
             hash[s.charAt(i + m - 1) - 'a']++;
             // check and try to update answer
             if (check(hash, target)) {
                 ans.add(i);
             }
-            System.out.println(i);
-            System.out.println(Arrays.toString(hash));
-            System.out.println("---");
         }
         return ans;
     }
