@@ -61,23 +61,22 @@ class Solution {
             }
         });
         List<int[]> list = new LinkedList<>();
-        for (int i = 0; i < a.length; ) {
-            int[] p = a[i];
+        for (int[] p : a) {
             int k = p[1];
             int cnt = 0;
-            int insertionIdx;
-            for (insertionIdx = 0; insertionIdx < list.size(); insertionIdx++) {
+            int i;
+            for (i = 0; i < list.size(); i++) {
+                if (list.get(i)[1] == k) {
+                    continue;
+                }
                 if (cnt == k) {
                     break;
                 }
-                if (list.get(insertionIdx)[0] >= p[0]) {
+                if (list.get(i)[0] >= p[0]) {
                     cnt++;
                 }
             }
-            list.add(insertionIdx, p);
-            while (++i < a.length && a[i][1] == p[1]) {
-                list.add(++insertionIdx, a[i]);
-            }
+            list.add(i, p);
         }
         return list.toArray(new int[][]{});
     }
