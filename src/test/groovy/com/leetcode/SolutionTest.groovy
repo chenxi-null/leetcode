@@ -1,5 +1,6 @@
 package com.leetcode
 
+
 import spock.lang.Ignore
 import spock.lang.Specification
 
@@ -10,26 +11,16 @@ import spock.lang.Specification
  */
 class SolutionTest extends Specification {
 
-    def "temp"() {
-        println (2 + 4) % 9
-
-        print (Integer.MAX_VALUE / 2) * 3
-
+    def "test"() {
         expect:
-        true
-    }
-
-    def "test"(String[] input, String[] output) {
-        expect:
-        String[] actual = new Solution().getFolderNames(input)
-        actual == output
+        len == new Solution().findUnsortedSubarray(nums as int[])
         where:
-        input                              | output
-        ['a', 'a', 'a', 'a']               | ['a', 'a(1)', 'a(2)', 'a(3)']
-        ['a', 'a(1)', 'a(2)', 'a']         | ['a', 'a(1)', 'a(2)', 'a(3)']
-        ['a', 'a(1)', 'a(2)', 'a']         | ['a', 'a(1)', 'a(2)', 'a(3)']
-        ['a', 'a(1)', 'a(3)', 'a']         | ['a', 'a(1)', 'a(3)', 'a(2)']
-        ['a', 'a(1)', 'a(3)', 'a', 'a(2)'] | ['a', 'a(1)', 'a(3)', 'a(2)', 'a(2)(1)']
+        nums                                             | len
+        [1, 2, 3]                                        | 0
+        [2, 6, 4, 8, 10, 9, 15]                          | 5
+        [2, 6, 999, 4, 10, 11, 99, 22, 1, 19, 20, 88]    | 12
+        [0, 2, 6, 999, 4, 10, 11, 99, 22, 1, 19, 20, 88] | 12
+        [2, 2, 3, 2, 4] | 2
     }
 
     @Ignore
