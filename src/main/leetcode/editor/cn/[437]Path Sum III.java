@@ -51,7 +51,9 @@
  */
 class Solution {
     public int pathSum(TreeNode root, int targetSum) {
-        dfs(root, new HashMap<>(), 0, targetSum);
+        Map<Integer, Integer> preSumToOccurCntMap = new HashMap<>();
+        preSumToOccurCntMap.put(0, 1);
+        dfs(root, preSumToOccurCntMap, 0, targetSum);
         return this.ans;
     }
 
@@ -60,10 +62,9 @@ class Solution {
     private void dfs(TreeNode root, Map<Integer, Integer> preSumToOccurCntMap, int preSum, int target) {
         if (root == null) return;
         int curPreSum = preSum + root.val;
-        if (preSumToOccurCntMap.getOrDefault(curPreSum - target, 0) > 0
-                || curPreSum == target) {
-            ans++;
-        }
+
+        ans += preSumToOccurCntMap.getOrDefault(curPreSum - target, 0);
+
         preSumToOccurCntMap.put(curPreSum, preSumToOccurCntMap.getOrDefault(curPreSum, 0) + 1);
         dfs(root.left, preSumToOccurCntMap, curPreSum, target);
         dfs(root.right, preSumToOccurCntMap, curPreSum, target);
