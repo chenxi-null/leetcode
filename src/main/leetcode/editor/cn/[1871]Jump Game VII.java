@@ -54,7 +54,7 @@ class Solution {
             return false;
         }
         for (int i = 0; i < n; ) {
-            System.out.println(i + ", [" + low + "," + high + "], [" + nextLow + "," + nextHigh + "]");
+            //System.out.println(i + ", [" + low + "," + high + "], [" + nextLow + "," + nextHigh + "]");
             if (i <= high) {
                 if (a[i] == '0') {
                     if (i + maxJump > high) {
@@ -68,8 +68,8 @@ class Solution {
                 i++;
             } else {
                 if (nextLow == MAX) {
-                    System.out.println(">>>");
-                    System.out.println("i: " + i);
+                    //System.out.println(">>>");
+                    //System.out.println("i: " + i);
                     return false;
                 }
                 low = nextLow;
