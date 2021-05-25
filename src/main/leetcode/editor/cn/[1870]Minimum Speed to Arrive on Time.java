@@ -75,25 +75,17 @@
 class Solution {
     public int minSpeedOnTime(int[] dist, double hour) {
         int n = dist.length;
-        //int max = -1;
-        //for (int d : dist) {
-        //    max = Math.max(max, d);
-        //    min = Math.min(max, d);
-        //}
         if (hour - (n - 1) <= 0) return -1;
-        //int candMax = Math.celling(dist[n - 1] / (hour - n + 1));
-        //max = Math.max(max, candMax);
         int l = 1;
         int r = 10_000_000;
         while (l <= r) {
-            int mid = l + r / 2;
+            int mid = (l + r) / 2;
 
             double midVal = 0.0;
             for (int i = 0; i < n - 1; i++) {
                 midVal += Math.ceil(((double) dist[i]) / mid);
             }
             midVal += ((double) dist[n - 1]) / mid;
-
             //System.out.println("[" + l + ", " + r + "]" + " " + mid + " | " + midVal);
 
             if (midVal < hour) {
