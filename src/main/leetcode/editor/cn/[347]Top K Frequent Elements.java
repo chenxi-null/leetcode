@@ -28,6 +28,51 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
+        int n = nums.length;
+        Map<Integer, Integer> numToCnt = new HashMap<>();
+        for (int num : nums) {
+            numToCnt.put(num, numToCnt.getOrDefault(num, 0) + 1);
+        }
+        List<int[]> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> e : numToCnt.entrySet()) {
+            list.add(new int[]{e.getKey(), e.getValue()});
+        }
+
+        int[] ret = new int[k];
+        qsort(0, list.size() - 1, k, list, ret, 0);
+        return ret;
+    }
+
+    private void qsort(int start, int end, int k, List<int[]> list, int[] ret, int retIdx) {
+        if (k == 0) return;
+        int picked = new Random().nextInt(end - start + 1) + start;
+        Collections.swap(list, picked, start);
+        int pivot = list.get(start)[1];
+        int index = start;
+        for (int i = start + 1; i <= end; i++) {
+            if (list.get(i)[1] >= pivot) {
+                Collections.swap(list, i, ++index);
+            }
+        }
+        Collections.swap(list, start, index);
+
+        int len = index - start + 1;
+        if (len > k) {
+            qsort(start, index, k, list, ret, retIdx);
+        } else {
+            for (int i = start; i <= index; i++) {
+                ret[retIdx++] = list.get(i)[0];
+            }
+            qsort(index + 1, end, k - len, list, ret, retIdx);
+        }
+    }
+}//leetcode submit region end(Prohibit modification and deletion)
+
+class Solution {
+    // use heap
+    public int[] 20210526_
+
+    topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> numToCnt = new HashMap<>();
         for (int num : nums) {
             numToCnt.put(num, numToCnt.getOrDefault(num, 0) + 1);
@@ -51,7 +96,8 @@ class Solution {
         return ans;
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+
+
 /*
 map: numToOccurenceCnt
 
