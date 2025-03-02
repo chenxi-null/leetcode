@@ -9,3 +9,8 @@ test.txt
 temp/
 src/main/java/com/leetcode/TempTest.java
 .DS_Store
+.factorypath
+.classpath
+.project
+.settings/
+.vscode/
