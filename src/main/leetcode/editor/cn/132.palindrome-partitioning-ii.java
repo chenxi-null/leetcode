@@ -2,7 +2,7 @@
  * @lc app=leetcode.cn id=132 lang=java
  *
  * [132] Palindrome Partitioning II
- * #tag/DP
+ * #Tag/DP
  *
  * [Trick] Use DP for palindrome preprocessing.
  */
