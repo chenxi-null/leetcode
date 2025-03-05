@@ -2,6 +2,7 @@
  * @lc app=leetcode.cn id=1278 lang=java
  *
  * [1278] Palindrome Partitioning III
+ * #Tag/DP
  */
 
 // @lc code=start
