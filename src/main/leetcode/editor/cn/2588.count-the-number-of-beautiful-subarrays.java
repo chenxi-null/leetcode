@@ -2,6 +2,11 @@
  * @lc app=leetcode.cn id=2588 lang=java
  *
  * [2588] Count the Number of Beautiful Subarrays
+ * #Tag/PrefixSum
+ * #Tag/Map
+ * #Tag/BitManipultion
+ * 
+ * [Template] Use PrefixSum and Map to count the number of subarray.
  */
 
 // @lc code=start
